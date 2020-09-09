@@ -1,0 +1,183 @@
+@import '../../../assets/scss/variables';
+@import '../../../assets/scss/mixins';
+
+.content {
+  max-width: $layout-post-single-width;
+  padding: 0 15px;
+  margin: 0 auto;
+
+  &__title {
+    font-size: $typographic-base-font-size * 2;
+    max-width: $layout-post-width;
+    margin-left: auto;
+    margin-right: auto;
+    font-weight: 600;
+    text-align: center;
+    @include line-height(1.65);
+    @include margin-top(1);
+    @include margin-bottom(0)
+  }
+
+  &__body {
+    & blockquote {
+      & p {
+      border-left: 3px solid $color-secondary;
+      color: #1a1a1a;
+      font-family: Georgia, Times, "Times New Roman", serif;
+      font-size: 1.25em;
+      font-style: italic;
+      line-height: 1.8em;
+      margin: 2.5em -4em;
+      margin-left: 0;
+      padding: 1em 2em;
+      position: relative;
+      transition: .2s border ease-in-out;
+      z-index: 0;
+      &:before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: -4px;
+        height: 2em;
+        background-color: #fff;
+        width: 5px;
+        margin-top: -1em;
+      }
+      &:after {
+        content: "\F027e";
+        font-size: 32px;
+        position: absolute;
+        top: 50%;
+        left: -0.5em;
+        color: $color-secondary;
+        font-family: "Material Design Icons";
+        font-style: normal;
+        line-height: 1em;
+        text-align: center;
+        text-indent: -2px;
+        width: 1em;
+        margin-top: -0.5em;
+        transition: .2s all ease-in-out, .4s transform ease-in-out;
+      }
+      &.format:before, &.format:after {
+        display: none;
+      }
+      &.book:after {
+        content: "\f12e";
+      }
+      &.podcast:after {
+        content: "\f32d";
+      }
+      &.lyrics:after {
+        content: "\f333";
+      }
+      &.favorite:after {
+        content: "\f384";
+      }
+      &:active:after {
+        transform: rotateY(360deg);
+      }
+
+      cite {
+        display: block;
+        font-size: 0.75em;
+        line-height: 1.8em;
+        margin-top: 1em;
+      }
+    }
+  }
+
+    & figure {
+      margin-top: 5em;
+      margin-bottom: 5em;
+      @include margin-bottom(1);
+
+    }
+
+    & a {
+      text-decoration: none;
+      color: rgb(50, 158, 126);
+    }
+
+    & * {
+      max-width: $layout-post-width;
+      margin-left: auto;
+      margin-right: auto
+    }
+
+    & img {
+      max-width: 100%;
+    }
+
+  }
+  @media (max-width: 980px) {
+    .container {
+      max-width: 720px;
+      padding: 0 3em 3em;
+    }
+  }
+  @media (max-width: 767px) {
+    &__body {
+      & blockquote {
+        & p {
+
+          border-top: 2px solid $color-secondary;
+          font-size: 1.1em;
+          border-bottom: 2px solid $color-secondary;
+          border-left: none;
+          margin: 1.5em 0;
+          padding: 1.5em 1em;
+          margin-top: 4rem;
+          margin-bottom: 4rem;
+          &:before {
+            left: 50%;
+            top: 0;
+            height: 4px;
+            margin-top: -3px;
+            margin-left: -1em;
+            width: 2em;
+          }
+          &:after {
+            font-size: 0.75em;
+            left: 50%;
+            top: 0;
+            margin-top: -0.5em;
+            margin-left: -0.5em;
+          }
+        }
+      }
+    }
+    cite {
+      text-align: right;
+    }
+  }
+
+}
+
+@include breakpoint-md {
+  .content {
+    padding: 0;
+
+    &__title {
+      font-size: $typographic-base-font-size * 3;
+      @include line-height(2.25);
+      @include margin-top(2.25);
+      @include margin-bottom(1.5)
+    }
+
+    &__body {
+      font-size: $typographic-base-font-size * 1.125;
+      @include line-height(1.125);
+      @include margin-bottom(1.125);
+
+      & p {
+        font-size: $typographic-base-font-size * 1.125;
+        @include line-height(1.125);
+        @include margin-bottom(1.125)
+      }
+
+    }
+
+  }
+
+}
