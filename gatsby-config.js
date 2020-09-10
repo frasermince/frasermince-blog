@@ -18,7 +18,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-canonical-urls`,
       options: {
-        siteUrl: `https://blog.unchart.io`,
+        siteUrl: `https://frasermince.com`,
       },
     },
     {

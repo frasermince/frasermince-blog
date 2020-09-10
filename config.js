@@ -3,7 +3,7 @@
 module.exports = {
   url: 'https://lumen.netlify.com',
   pathPrefix: '/',
-  title: 'Unchart Blog',
+  title: 'Fraser Mince Blog',
   subtitle: 'Read Your Way To Fluency',
   copyright: '© All rights reserved.',
   disqusShortname: '',
@@ -25,9 +25,9 @@ module.exports = {
     }
   ],
   author: {
-    name: 'Unchart',
+    name: 'Fraser Mince',
     photo: '/logo.png',
-    bio: 'Read Your Way To Fluency',
+    bio: 'Personal Blog',
     contacts: {
       email: '',
       facebook: '#',
