@@ -4,7 +4,7 @@ module.exports = {
   url: 'https://lumen.netlify.com',
   pathPrefix: '/',
   title: 'Fraser Mince Blog',
-  subtitle: 'Read Your Way To Fluency',
+  subtitle: 'Personal Blog',
   copyright: '© All rights reserved.',
   disqusShortname: '',
   postsPerPage: 4,
@@ -14,6 +14,10 @@ module.exports = {
     {
       label: 'Articles',
       path: '/'
+    },
+    {
+      label: 'Portfolio',
+      url: 'https://frasermince.com'
     },
     {
       label: 'About',
