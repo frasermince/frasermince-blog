@@ -9,10 +9,10 @@ tags:
   - "Machine Learning"
   - "Entrepreneurship"
   - "Unchart"
-description: "In April I lost my job as a Software Engineer. I had long wanted to venture out and spend time trying to become a successful indie hacker. I also wanted to level up my machine learning skills to pursue a career in research. So I decided"
+description: "In April I lost my job as a Software Engineer. I have long wanted to venture out and spend time trying to become a successful indie hacker. I also wanted to level up my machine learning skills to pursue a career in research. So I decided"
 socialImage: "/media/image-2.jpg"
 ---
-In April I lost my job as a Software Engineer. I had long wanted to venture out and spend time trying to become a successful indie hacker. I also wanted to level up my machine learning skills to pursue a career in research. So I decided to view this as an opportunity to learn as much as possible, build new things, and up my skills while living off some unemployment and savings. This article will serve as a log of what I’ve done so far and a plan for the future.
+In April I lost my job as a Software Engineer. I have long wanted to venture out and spend time trying to become a successful indie hacker. I also wanted to level up my machine learning skills to pursue a career in research. So I decided to view this as an opportunity to learn as much as possible, build new things, and up my skills while living off some unemployment and savings. This article will serve as a log of what I’ve done so far and my plan for the future.
 
 ## So Far
 
