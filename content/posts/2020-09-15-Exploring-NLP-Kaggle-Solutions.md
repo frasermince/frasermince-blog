@@ -15,7 +15,7 @@ socialImage: "/media/image-2.jpg"
 
 A year ago I attempted with my limited knowledge to compete in the Jigsaw Toxicity Kaggle contest. The goal of this contest is, given a sentence, classify if this sentence contains toxicity. I did not do particularly well in the competition, however I was very curious to how I could have done better. While the 2020 jigsaw challenge is slightly different than the one I participated in I want to look at the solution provided by its winner and explore in depth what they did in order to make a state of the art language classifier.
 
-The winners have outlined their solution in a [post](https://www.kaggle.com/c/jigsaw-multilingual-toxic-comment-classification/discussion/160862) on kaggle but they reference a lot of the core concepts without explaining what they mean. While this is very reasonable for their purposes I personally had not been exposed to a lot of these ideas and thus have spent time learning how all the different pieces work. So this article is a byproduct of my seeking understanding into this solution. This post will be a deep dive into that aforementioned discussion by the winner and a reimplementation https://www.kaggle.com/mint101/jmtc-20-lb-9508-mono-lingual-models.
+The winners have outlined their solution in a [post](https://www.kaggle.com/c/jigsaw-multilingual-toxic-comment-classification/discussion/160862) on kaggle. They reference a lot of the core concepts without explaining what they mean. While this is very reasonable for their purposes I personally had not been exposed to a lot of these ideas and thus have spent time learning how all the different pieces work. So this post is a byproduct of my seeking understanding into this solution.
 
 ## Why Write About This Contest?
 Over the last couple of years I have learned the concepts behind the state of
@@ -49,8 +49,6 @@ NLP problems and the existence of pretrained models allowing for better results
 while using less compute. Models that use this self-attention mechanism are
 called transformers. If you are interested in learning more I would check out
 [The Illustrated Transformer](http://jalammar.github.io/illustrated-transformer/), [The Illustarted Bert](http://jalammar.github.io/illustrated-bert/), and the original Paper [Attention Is All You Need](https://arxiv.org/abs/1706.03762)
-
-## K-fold CV
 
 ## Ensembling
 
@@ -102,11 +100,11 @@ not really made clear in the paper.
 The [original paper](https://openreview.net/pdf?id=BJ6oOfqge) includes pseudo code but I found it fairly hard to read. So I took what I could gather from that Pseudo Code and [an implementation](https://github.com/tensorfreitas/Temporal-Ensembling-for-Semi-Supervised-Learning) and tried to write a more developer friendly piece of pseudocode.
 a more verbose version here for clarity.
 
-```python
+```ruby
 weighed_predictions = 0[N x C]
 accumulated_targets = 0[N x C]
-for epoch_number in [1, num_epochs]:
-  for each batch:
+for epoch_number in [1, num_epochs] do
+  for each batch do
     labeled_data, labeled_targets = get_labeled(batch)
     unlabeled_data = get_unlabeled(batch)
 
@@ -119,7 +117,7 @@ for epoch_number in [1, num_epochs]:
           labeled_predictions,
           labeled_targets
       )
-      + mean_squared_error(
+      + rampup_value * mean_squared_error(
         unlabeled_predictions,
         accumulated_targets[current_indexes]
       )
@@ -132,6 +130,8 @@ for epoch_number in [1, num_epochs]:
     accumulated_targets[current_indexes] =
       weighted_predictions[current_indexes]
         * (1 / (1 - alpha ^ epoch_number))
+  end
+end
 ```
 
 ## Foreign language monolingual Transformer models
@@ -139,6 +139,12 @@ One of the unique challenges for the 2020 Jigsaw Competition was the inclusion
 of foreign language test entries without having foreign language training data.
 This meant that outside data and creative solutions would be needed to properly
 classify these examples. The winners used a solution from the [MultiFiT Paper](https://arxiv.org/pdf/1909.04761.pdf) to increase the accuracy.
+
+<figure>
+  <img src="/media/multiFiT.png" alt="Bias Variance Tradeoff">
+  <figcaption>Tradeoff between variance and bias. Source: https://towardsdatascience.com/ensemble-methods-bagging-boosting-and-stacking-c9214a10a205</figcaption>
+</figure>
+
 
 ## References
 https://openreview.net/pdf?id=BJ6oOfqge
