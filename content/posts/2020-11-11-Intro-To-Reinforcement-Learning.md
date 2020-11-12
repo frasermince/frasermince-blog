@@ -56,19 +56,13 @@ the current state and all future states. This may mean we take actions that
 bring us to a state with low immediate reward but high rewards sometime in the
 future. A good example of this would be making a financial investment. Doing so
 might have negative reward in the immediate moment but high reward in the
-future.
+future. We call this cumulative reward return or $ G_t
 
-## Policy
-A policy is a mapping from state to actions that tells us which action
-to take. It can either be deterministic in which case it can be denoted by mu.
-Or it can be stochastic and be sampled from a distribution, in which case it
-will be referred to as pi. The policy can be viewed as an agent’s brain. It
-decides what action we should take. In cases of deep reinforcement learning we
-will often use parametrized policies, or a neural net, to define our
-action choices.
+$$
+G_t = R_{t+1} + R_{t+2} + R_{t+3} + ...
+$$
 
 
-# Diagram for return or cumulative reward Gt
 
 We then find the expected cumulative reward. Which we refer to as the value.
 
@@ -77,10 +71,31 @@ We then find the expected cumulative reward. Which we refer to as the value.
 So both the reward and the value define the desirability of a
 transition. With the reward defining the desirability of a single step and the
 value being a more general measure of desirability for that state going to the
-indefinite future.
+indefinite future. We refer to the value conditioned on state as v(s).
 
-We can choose to condition on just the current state or on the state and action.
-If we choose to condition on both we call this Q.
+$$
+v(s) = \mathop{\mathbb{E}}[G_t \mid S_t = s]
+$$
+
+
+We can also choose to condition on the state and action. In this case we call
+the state action value q(s, a).
+
+$$
+q(s, a) = \mathop{\mathbb{E}}[G_t \mid S_t = s, A_t = a]
+$$
+
+
+## Policy
+A policy is a mapping from state to actions that tells us which action
+to take. It can either be deterministic in which case it can be denoted by µ.
+Or it can be stochastic and be sampled from a distribution, in which case it
+will be referred to as π. The policy can be viewed as an agent’s brain. It
+decides what action we should take. In cases of deep reinforcement learning we
+will often use parametrized policies, or a neural net, to define our
+action choices.
+
+
 
 # Q function definition
 

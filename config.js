@@ -9,7 +9,7 @@ module.exports = {
   disqusShortname: '',
   postsPerPage: 4,
   googleAnalyticsId: 'UA-160637777-2',
-  useKatex: false,
+  useKatex: true,
   menu: [
     {
       label: 'Articles',
