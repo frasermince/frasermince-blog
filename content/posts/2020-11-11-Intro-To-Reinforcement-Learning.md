@@ -4,7 +4,7 @@ date: "2020-11-11T10:00:00.0000"
 template: "post"
 draft: false
 slug: "reinforcement-learning-1"
-category: "Growth"
+category: "Machine Learning"
 tags:
   - "Machine Learning"
   - "Reinforcement Learning"
@@ -25,16 +25,17 @@ the field of reinforcement learning.
 Reinforcement learning is the process of interacting with your environment and
 maximizing some reward. A natural form of reinforcement learning happens all the
 time. Whenever a child is playing and learning to understand the world through
-interaction an analogue of it is taking place. In computer science there is a
-whole field of study to understand how this can take place with computers. 
-While reinforcement learning belongs in the category of machine learning it differs from other methods
-in important ways. It differs from supervised learning where you are training a model based on a
-labeled dataset. Supervised learning can not learn from unstructured interaction with the
-environment. Instead you are completely dependent on the data you provide. However
-reinforcement learning gives us a robust way to learn from interaction without
-labeling. Another difference from supervised learning is the need to think about
-delayed reward. Not only will you need to think about reward happening
-immediately but also far in the future.
+interaction natural reinforcement learning is taking place. In computer science
+there is a whole field of study to understand how computers can learn from
+interaction.  Reinforcement learning differs from other methods of machine
+learning in important ways. Instead of training a model on a labeled dataset as
+in supervised learning you are working with unlabeled data.  Supervised learning
+can not learn from unstructured interaction with the environment. Instead you
+are completely dependent on the data you provide. However reinforcement learning
+gives us a robust way to learn from interaction without labeling. Another
+difference from supervised learning is the need to think about delayed reward.
+Not only will you need to think about reward happening immediately but also far
+in the future.
 
 There are multiple complicating factors inherent in thinking about such a
 problem including: how far to look in the future, what long term consequences
@@ -50,87 +51,96 @@ case of robot movement, parts of the robot may be considered the environment. In
 other words we treat the agent as the decision making algorithm instead of as
 the robot as a whole.
 
+## Reward
+
 The reward is a feedback signal representing how valuable a state is. The
 agent’s job is to maximize cumulative reward. This means the reward of being in
 the current state and all future states. This may mean we take actions that
 bring us to a state with low immediate reward but high rewards sometime in the
 future. A good example of this would be making a financial investment. Doing so
-might have negative reward in the immediate moment but high reward in the
-future. We call this cumulative reward return or $ G_t
+might have negative reward in the immediate moment but high reward later.
+We call this cumulative reward return or $ G_t $
 
 $$
 G_t = R_{t+1} + R_{t+2} + R_{t+3} + ...
 $$
 
-
-
 We then find the expected cumulative reward. Which we refer to as the value.
 
-# Diagram of value or expected cumulative	reward
+## Discounting
+In practice for the value function we will not always use the accumulated reward
+but instead a reward accumulated with future time steps discounted. This is
+because we prefer reward now rather than later and if we do not discount we
+might build a program that prefers rewards so far in the future as to basically
+never happen. This is particularly true if we are dealing with an infinite
+horizon. A great example of this is if you have a program trying to get out of a
+maze we prefer for it to get out sooner rather than eventually. Otherwise we
+might see a program that loops for a long period of time rather than getting out
+quickly.
 
-So both the reward and the value define the desirability of a
-transition. With the reward defining the desirability of a single step and the
-value being a more general measure of desirability for that state going to the
-indefinite future. We refer to the value conditioned on state as v(s).
+## Value
+
+This reward defines the desirability of a single step. We can also define a more
+general measure of desirability for future steps. We call this the value. We can
+choose to condition this value on just the state or both the state and value. We
+refer to the value conditioned on state as v(s).
 
 $$
 v(s) = \mathop{\mathbb{E}}[G_t \mid S_t = s]
 $$
 
 
-We can also choose to condition on the state and action. In this case we call
-the state action value q(s, a).
+If we condition on the state and action we call refer to it as q(s, a).
+
 
 $$
 q(s, a) = \mathop{\mathbb{E}}[G_t \mid S_t = s, A_t = a]
 $$
 
+Something left out of these definitions is the fact that value functions are
+always conditioned on a policy. So we will often use π to denote that we are
+conditioning on a policy.
+
+$$
+v_π(s) = \mathop{\mathbb{E}}[G_t \mid S_t = s]
+$$
+
+$$
+q_π(s, a) = \mathop{\mathbb{E}}[G_t \mid S_t = s, A_t = a]
+$$
 
 ## Policy
 A policy is a mapping from state to actions that tells us which action
 to take. It can either be deterministic in which case it can be denoted by µ.
 Or it can be stochastic and be sampled from a distribution, in which case it
-will be referred to as π. The policy can be viewed as an agent’s brain. It
+will be referred to as π.
+
+$$
+a_t = µ(s_t)
+$$
+$$
+a_t \sim π(\cdot | s_t)
+$$
+
+The policy can be viewed as an agent’s brain. It
 decides what action we should take. In cases of deep reinforcement learning we
 will often use parametrized policies, or a neural net, to define our
 action choices.
-
-
-
-# Q function definition
 
 ## Components of an Agent:
 
 ## Agent State
 An agent carries it’s own state. These states are separate from those of the
-environment. The agent’s state is used to choose actions to perform 
+environment. The agent’s state is used to choose which actions to perform.
 
 ## Environment State
 The full information describing the environment. An agent can either have
 partial or full access to the state of the environment.  In most real world
-problems partial state is what is available. However in some cases, like chess
-for example, the full state of the environment may be know. Often time the full
+problems partial state is what is available. However in some cases, like chess,
+the full state of the environment may be known. In many cases the full
 state of the environment will carry lots of irrelevant information. For example
 a robot does not need to know the exact number of atoms present in the world
 around it.
-
-
-## Value functions
-In practice for the value function we will not simply use the accumulated reward
-but instead a reward accumulated with future timesteps discounted. This
-is because we prefer reward now rather than later and if did not discount we
-might build a program that prefers rewards so far in the future as to basically
-never happen. A great example of this is if you have a program trying to get out
-of a maze we prefer for it to get out sooner rather than eventually. Otherwise
-we might see a program that loops for a long period of time rather than getting
-out quickly.
-
-
-## Approximation: ?REMOVE
-Often times the state space will be too big to calculate the
-actual value function and instead we will attempt to approximate using something
-like a neural net. I will not go into detail here but will discuss this further
-in a later article. 
 
 ## Model: 
 A model is a prediction of the next state given an action and the
@@ -145,7 +155,11 @@ as we move a piece on the board the state is obvious. However if you are moving
 a robot around the real world it might be much more difficult to understand how
 your action will effect the state of the environment. 
 
-## Different types of agents
+## Categories of agents.
+
+We can categorize agents based on what components they use to maximize values.
+While we will cover this more in depth in future articles I want to lay out the
+ideas here.
 
 ## Value based: 
 Has an approximate value function that is used to determine
@@ -155,16 +169,18 @@ instead will construct from value function.
 ## Policy based: 
 Policy based will map states to actions but will not explicitly find the value.
 ## Actor critic: 
-Has both a policy and value function defined. The policy would be a actor and
+Has both a policy and value function defined. The policy would be the actor and
 the value would critique that actor. 
-
-
 
 ## Model free: 
 Uses a policy or value function but does not have a model
 
 ## Model based: 
 Has a model of the next state but values and policy functions are optional
+
+
+--
+
 
 Specifically we can say there are two hard things in RL: Learning - in these
 cases the environment is unknown and the agent interacts with the environment to
@@ -194,27 +210,7 @@ Dota
 
 Waymo?
 
- 
-
 A central problem in reinforcement learning is the exploration-exploitation
 tradeoff. Unless perfect knowledge is available there will always be a choice to
 be made in if we should try to discover choices that are valuable or instead
 take advantage of the choices we already see as valuable.
-
-
-Elements of reinforcement learning:
-
-Reinforcement learning consists of a few core concepts: Environment - The
-environment is everything you can Reinforcement learning differs from Supervised
-learning in some very core ways. In supervised learning you are training a model
-based on a training set that you have already defined. Reinforcement	learning
-on the other hand requires defining or predicting rewards signals in order to
-improve your actions. So in reinforcement learning you do not know the correct
-answer but you can define rewards that help you move in the correct direction.
-
-Terms in reinforcement learning:
-
-State Action Value Policy
-
-
-Categories of Algorithms Actor Critic Model Model Free
