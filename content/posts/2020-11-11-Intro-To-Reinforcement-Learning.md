@@ -12,6 +12,7 @@ description: ""
 socialImage: "/media/image-2.jpg"
 ---
 
+--
 I am currently using several resources
 to go about this journey. I am reading the textbook
 http://incompleteideas.net/book/bookdraft2017nov5.pdf, watching lectures from
@@ -21,6 +22,7 @@ find myself stuck by my lack of understanding in the field of probability. So I
 will do my best to help direct my reader in the right direction and assume very
 limited knowledge of probability. To start with I want to discuss the basics of
 the field of reinforcement learning.
+--
 
 Reinforcement learning is the process of interacting with your environment and
 maximizing some reward. A natural form of reinforcement learning happens all the
@@ -37,10 +39,50 @@ difference from supervised learning is the need to think about delayed reward.
 Not only will you need to think about reward happening immediately but also far
 in the future.
 
+So what are some signs that reinforcement learning is the right tool to solve a
+problem? If you are in a case where you either need to learn about
+your environment or plan the best way to go forward reinforcement learning may
+be the right tool.
+
+--
+Learning - in these cases the environment is unknown and the agent interacts
+with the environment to create a policy.
+Planning - if we know the environment then our job becomes to plan what to do.
+This does not require interaction with the environment until the plan is made.
+--
+
+Before we dive in why study reinforcement learning?  What are some practical
+applications of it that are worth viewing. Let’s explore some of the most
+impressive accomplishments in RL before jumping in to specifics.
+
+## Examples
+
+# AlphaGo
+One of the most impressive uses of RL is board games. For a long time people
+held the game of Go as the impossible mountain for AI to climb. The number of
+possible states is higher than the number of atoms in the universe. However
+using a combination of deep learning and reinforcement learning techniques
+Deepmind was able to create a program to beat masters at Go. If you want to
+learn more check out the AlphaGo page at
+https://deepmind.com/research/case-studies/alphago-the-story-so-far.
+
+## OpenAI 5
+OpenAI was able to train a system to play Dota 2 as a team and win against
+professionals. Not only was this system able to win it was able to be a good
+teammate and support other players on their team regardless of if the player was
+human or AI. The complexity of DOTA 2 and the need to collaborate makes this
+achievement especially impressive. https://openai.com/projects/five/
+
+SELF DRIVING CAR?
+
+Robotic movement
+
+--
 There are multiple complicating factors inherent in thinking about such a
 problem including: how far to look in the future, what long term consequences
 are of an action, how we actively gain new experiences, how we predict what
 comes next, and dealing with the uncertainty of complicated environments.
+--
 
 The main structure of reinforcement learning is the agent-environment loop. The
 environment is the state of the world that the agent interacts with. The agent
@@ -142,7 +184,7 @@ state of the environment will carry lots of irrelevant information. For example
 a robot does not need to know the exact number of atoms present in the world
 around it.
 
-## Model: 
+## Model:
 A model is a prediction of the next state given an action and the
 current state. Models can be used to improve our understanding of future
 reward. However models can be difficult to learn and in many cases we choose not
@@ -153,7 +195,7 @@ some domains predicting next states is easier than others. For example in a game
 like chess or go predicting the next state is trivial. This is because as soon
 as we move a piece on the board the state is obvious. However if you are moving
 a robot around the real world it might be much more difficult to understand how
-your action will effect the state of the environment. 
+your action will effect the state of the environment.
 
 ## Categories of agents.
 
@@ -161,52 +203,34 @@ We can categorize agents based on what components they use to maximize values.
 While we will cover this more in depth in future articles I want to lay out the
 ideas here.
 
-## Value based: 
+## Value based:
 Has an approximate value function that is used to determine
 which actions are better than others. Will not explicitly find the policy but
 instead will construct from value function.
 
-## Policy based: 
+## Policy based:
 Policy based will map states to actions but will not explicitly find the value.
-## Actor critic: 
+## Actor critic:
 Has both a policy and value function defined. The policy would be the actor and
-the value would critique that actor. 
+the value would critique that actor.
 
-## Model free: 
+## Model free:
 Uses a policy or value function but does not have a model
 
-## Model based: 
+## Model based:
 Has a model of the next state but values and policy functions are optional
 
 
 --
 
+Prediction - give value to future states
+Control - find the best future state
+is we can find previously unknown solutions.
 
-Specifically we can say there are two hard things in RL: Learning - in these
-cases the environment is unknown and the agent interacts with the environment to
-create a policy.  Planning - if we know the environment then our job becomes to
-plan what to do. This does not require interaction with the environment until
-the plan is made
 
-Prediction - give value to future states Control - find the best future state
-
-So what can we uniquely accomplish with reinforcement learning. One major thing
-is we can find previously unknown solutions. If you are playing a game like
-Chess or Go we could use reinforcement learning to learn better ways of playing
-which a human has never thought of. We can also build programs that continue to
-learn even while being operated to adapt to new circumstances. A great example
-of this is robots interacting with terrain they have never seen before and
-learning to handle it.  So before we dive in why study reinforcement learning?
-What are some practical applications of it that are worth viewing. Let’s explore
-some of the most impressive accomplishments in RL before jumping in to
-specifics. 
 
 Domains that it can be used: Piloting a Helicopter Managing an investment
 portfolio Making a robot walk Playing video or board games
-
-Specific cool applications: AlphaGo
-
-Dota
 
 Waymo?
 
