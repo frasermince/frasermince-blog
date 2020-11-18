@@ -25,19 +25,22 @@ the field of reinforcement learning.
 --
 
 Reinforcement learning is the process of interacting with your environment and
-maximizing some reward. A natural form of reinforcement learning happens all the
-time. Whenever a child is playing and learning to understand the world through
-interaction natural reinforcement learning is taking place. In computer science
-there is a whole field of study to understand how computers can learn from
-interaction.  Reinforcement learning differs from other methods of machine
-learning in important ways. Instead of training a model on a labeled dataset as
-in supervised learning you are working with unlabeled data.  Supervised learning
-can not learn from unstructured interaction with the environment. Instead you
-are completely dependent on the data you provide. However reinforcement learning
-gives us a robust way to learn from interaction without labeling. Another
-difference from supervised learning is the need to think about delayed reward.
-Not only will you need to think about reward happening immediately but also far
-in the future.
+maximizing some reward. The core principles of RL take place all the time in the
+natural world. Whenever a child is playing and learning to understand the world
+through interaction natural reinforcement learning is taking place. In computer
+science we have used these natural analogues as a starting point to understand
+how programs can improve through interaction.
+
+While reinforcement learning often shares characteristics with other types of
+machine learning there are also big differences. Instead of training a model on
+a labeled dataset as in supervised learning you are working with unlabeled data.
+Supervised learning does not attempt to learn through interaction with an
+environment. Instead you are completely dependent on the data and labels you
+provide. Another difference from supervised learning is the need to think about
+delayed reward. Not only will you need to think about reward happening
+immediately but also far in the future. RL also differs from unsupervised and
+semisupervised learning. While these focus on finding hidden structure in the
+data they do not handle interaction with an environment.
 
 So what are some signs that reinforcement learning is the right tool to solve a
 problem? If you are in a case where you either need to learn about
@@ -73,9 +76,11 @@ teammate and support other players on their team regardless of if the player was
 human or AI. The complexity of DOTA 2 and the need to collaborate makes this
 achievement especially impressive. https://openai.com/projects/five/
 
-SELF DRIVING CAR?
+## Simulated Robot Movement
 
-Robotic movement
+Another example of RL in action would be a robot teaching itself to
+walk. Deepmind did this in a simulated environment and the results, while they
+may look silly are impressive. https://deepmind.com/blog/article/producing-flexible-behaviours-simulated-environments
 
 --
 There are multiple complicating factors inherent in thinking about such a
@@ -90,8 +95,8 @@ chooses an action based on current and future rewards and that action will then
 change the state of the environment. The boundary between agent and environment
 can entirely depend on the problem we are trying to solve. For example in the
 case of robot movement, parts of the robot may be considered the environment. In
-other words we treat the agent as the decision making algorithm instead of as
-the robot as a whole.
+other words the agent is the decision making algorithm and not the robot as a
+whole.
 
 ## Reward
 
@@ -107,18 +112,20 @@ $$
 G_t = R_{t+1} + R_{t+2} + R_{t+3} + ...
 $$
 
-We then find the expected cumulative reward. Which we refer to as the value.
+We then find the expected cumulative reward. Or the weighted average of the
+reward distribution. Which we refer to as the value.
 
 ## Discounting
 In practice for the value function we will not always use the accumulated reward
 but instead a reward accumulated with future time steps discounted. This is
-because we prefer reward now rather than later and if we do not discount we
+because we prefer reward now rather than later. If we do not discount we
 might build a program that prefers rewards so far in the future as to basically
 never happen. This is particularly true if we are dealing with an infinite
 horizon. A great example of this is if you have a program trying to get out of a
 maze we prefer for it to get out sooner rather than eventually. Otherwise we
 might see a program that loops for a long period of time rather than getting out
-quickly.
+quickly. In we have a infinite horizon we would formally say that we would not
+converge without a discounted future reward.
 
 ## Value
 
