@@ -20,8 +20,7 @@ deep mind, and using the spinningup in Deep RL guide from OpenAI. As I go
 through I intend to implement algorithms and explain the core concepts. Often I
 find myself stuck by my lack of understanding in the field of probability. So I
 will do my best to help direct my reader in the right direction and assume very
-limited knowledge of probability. To start with I want to discuss the basics of
-the field of reinforcement learning.
+limited knowledge of probability. These posts will be a cleaned up version of my notes as I have watched the 2018 Deepmind RL course.
 --
 
 Reinforcement learning is the process of interacting with your environment and
@@ -54,14 +53,13 @@ Planning - if we know the environment then our job becomes to plan what to do.
 This does not require interaction with the environment until the plan is made.
 --
 
-Before we dive in why study reinforcement learning?  What are some practical
-applications of it that are worth viewing. Let’s explore some of the most
-impressive accomplishments in RL before jumping in to specifics.
+Before we dive in why study reinforcement learning. I want to explore why you should care. Why are these class of algorithms intesting? To do this I will take you through some of the most
+impressive accomplishments in RL.
 
 ## Examples
 
 # AlphaGo
-One of the most impressive uses of RL is board games. For a long time people
+One of the most impressive uses of RL is in beating grand masters at board games. For a long time people
 held the game of Go as the impossible mountain for AI to climb. The number of
 possible states is higher than the number of atoms in the universe. However
 using a combination of deep learning and reinforcement learning techniques
@@ -73,7 +71,7 @@ https://deepmind.com/research/case-studies/alphago-the-story-so-far.
 OpenAI was able to train a system to play Dota 2 as a team and win against
 professionals. Not only was this system able to win it was able to be a good
 teammate and support other players on their team regardless of if the player was
-human or AI. The complexity of DOTA 2 and the need to collaborate makes this
+human or AI. DOTA 2 happens in real time (compared to something turn based like chess) making this a very computationally expensive problem to solve. This complexity and the need to collaborate makes this
 achievement especially impressive. https://openai.com/projects/five/
 
 ## Simulated Robot Movement
@@ -116,15 +114,13 @@ We then find the expected cumulative reward. Or the weighted average of the
 reward distribution. Which we refer to as the value.
 
 ## Discounting
-In practice for the value function we will not always use the accumulated reward
-but instead a reward accumulated with future time steps discounted. This is
-because we prefer reward now rather than later. If we do not discount we
+In practice for the accumulation the reward we will not always just add everything up
+but instead use a reward accumulated with future time steps discounted. This is
+because we prefer reward sooner rather than later. If we do not discount we
 might build a program that prefers rewards so far in the future as to basically
 never happen. This is particularly true if we are dealing with an infinite
 horizon. A great example of this is if you have a program trying to get out of a
-maze we prefer for it to get out sooner rather than eventually. Otherwise we
-might see a program that loops for a long period of time rather than getting out
-quickly. In we have a infinite horizon we would formally say that we would not
+maze, if you do not discount it might loop for a long period of time before escaping. If we have a infinite horizon we would formally say that we would not
 converge without a discounted future reward.
 
 ## Value
@@ -176,11 +172,11 @@ decides what action we should take. In cases of deep reinforcement learning we
 will often use parametrized policies, or a neural net, to define our
 action choices.
 
+
 ## Components of an Agent:
 
 ## Agent State
-An agent carries it’s own state. These states are separate from those of the
-environment. The agent’s state is used to choose which actions to perform.
+An agent has it’s own state separate from that of the environment. The agent’s state is used to choose which actions to perform.
 
 ## Environment State
 The full information describing the environment. An agent can either have
