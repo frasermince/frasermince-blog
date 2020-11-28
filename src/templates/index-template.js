@@ -7,10 +7,10 @@ import Feed from '../components/Feed';
 import Page from '../components/Page';
 import Pagination from '../components/Pagination';
 import { useSiteMetadata } from '../hooks';
-import type { PageContext, AllMarkdownRemark } from '../types';
+import type { PageContext, allMdx } from '../types';
 
 type Props = {
-  data: AllMarkdownRemark,
+  data: allMdx,
   pageContext: PageContext
 };
 
@@ -26,7 +26,7 @@ const IndexTemplate = ({ data, pageContext }: Props) => {
   } = pageContext;
 
 
-  const { edges } = data.allMarkdownRemark;
+  const { edges } = data.allMdx;
   const pageTitle = currentPage > 0 ? `Posts - Page ${currentPage} - ${siteTitle}` : siteTitle;
 
   return (
@@ -47,7 +47,7 @@ const IndexTemplate = ({ data, pageContext }: Props) => {
 
 export const query = graphql`
   query IndexTemplate($postsLimit: Int!, $postsOffset: Int!) {
-    allMarkdownRemark(
+    allMdx(
         limit: $postsLimit,
         skip: $postsOffset,
         filter: { frontmatter: { template: { eq: "post" }, draft: { ne: true } } },

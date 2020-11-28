@@ -6,7 +6,7 @@ const { createFilePath } = require('gatsby-source-filesystem');
 const onCreateNode = ({ node, actions, getNode }) => {
   const { createNodeField } = actions;
 
-  if (node.internal.type === 'MarkdownRemark') {
+  if (node.internal.type === 'Mdx') {
     if (typeof node.frontmatter.slug !== 'undefined') {
       const dirname = getNode(node.parent).relativeDirectory;
       createNodeField({
@@ -22,8 +22,8 @@ const onCreateNode = ({ node, actions, getNode }) => {
         value
       });
     }
-
     if (node.frontmatter.tags) {
+      console.log("CREATE SLUGS");
       const tagSlugs = node.frontmatter.tags.map((tag) => `/tag/${_.kebabCase(tag)}/`);
       createNodeField({ node, name: 'tagSlugs', value: tagSlugs });
     }

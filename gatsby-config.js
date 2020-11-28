@@ -50,6 +50,9 @@ module.exports = {
       }
     },
     {
+      resolve: 'gatsby-plugin-mdx-frontmatter'
+    },
+    {
       resolve: 'gatsby-plugin-feed',
       options: {
         query: `
@@ -64,26 +67,26 @@ module.exports = {
           }
         `,
         feeds: [{
-          serialize: ({ query: { site, allMarkdownRemark } }) => (
-            allMarkdownRemark.edges.map((edge) => ({
+          serialize: ({ query: { site, allMdx } }) => (
+            allMdx.edges.map((edge) => ({
               ...edge.node.frontmatter,
               description: edge.node.frontmatter.description,
               date: edge.node.frontmatter.date,
               url: site.siteMetadata.site_url + edge.node.fields.slug,
               guid: site.siteMetadata.site_url + edge.node.fields.slug,
-              custom_elements: [{ 'content:encoded': edge.node.html }]
+              custom_elements: [{ 'content:encoded': edge.node.body }]
             }))
           ),
           query: `
               {
-                allMarkdownRemark(
+                allMdx(
                   limit: 1000,
                   sort: { order: DESC, fields: [frontmatter___date] },
                   filter: { frontmatter: { template: { eq: "post" }, draft: { ne: true } } }
                 ) {
                   edges {
                     node {
-                      html
+                      body
                       fields {
                         slug
                       }
@@ -102,37 +105,6 @@ module.exports = {
           output: '/rss.xml',
           title: siteConfig.title
         }]
-      }
-    },
-    {
-      resolve: 'gatsby-transformer-remark',
-      options: {
-        plugins: [
-          'gatsby-remark-relative-images',
-          {
-            resolve: 'gatsby-remark-katex',
-            options: {
-              strict: 'ignore'
-            }
-          },
-          {
-            resolve: 'gatsby-remark-images',
-            options: {
-              maxWidth: 960,
-              withWebp: true,
-              ignoreFileExtensions: [],
-            }
-          },
-          {
-            resolve: 'gatsby-remark-responsive-iframe',
-            options: { wrapperStyle: 'margin-bottom: 1.0725rem' }
-          },
-          'gatsby-remark-autolink-headers',
-          'gatsby-remark-prismjs',
-          'gatsby-remark-copy-linked-files',
-          'gatsby-remark-smartypants',
-          'gatsby-remark-external-links'
-        ]
       }
     },
     'gatsby-transformer-sharp',
@@ -200,12 +172,44 @@ module.exports = {
     'gatsby-plugin-catch-links',
     'gatsby-plugin-react-helmet',
     {
+      resolve: `gatsby-plugin-mdx`, 
+      options: {
+        extentions: [`.md`, `.mdx`],
+        gatsbyRemarkPlugins: [
+          'gatsby-remark-relative-images',
+          {
+            resolve: 'gatsby-remark-katex',
+            options: {
+              strict: 'ignore'
+            }
+          },
+          {
+            resolve: 'gatsby-remark-images',
+            options: {
+              maxWidth: 960,
+              withWebp: true,
+              ignoreFileExtensions: [],
+            }
+          },
+          {
+            resolve: 'gatsby-remark-responsive-iframe',
+            options: { wrapperStyle: 'margin-bottom: 1.0725rem' }
+          },
+          'gatsby-remark-autolink-headers',
+          'gatsby-remark-prismjs',
+          'gatsby-remark-copy-linked-files',
+          'gatsby-remark-smartypants',
+          'gatsby-remark-external-links'
+        ]
+      }
+    },
+    {
       resolve: 'gatsby-plugin-sass',
       options: {
         postCssPlugins: [...postCssPlugins],
         cssLoaderOptions: {
           camelCase: false,
-        }
+        },
       }
     },
     'gatsby-plugin-flow',
